@@ -12,16 +12,18 @@
     </nuxt-link>
     <v-spacer />
     <v-btn
+      text
       class="ml-5"
       @click="login"
     >
-      Login
+      Sign in
     </v-btn>
     <v-btn
       class="ml-5"
+      outlined
       @click="registration"
     >
-      Registration
+      Sign up
     </v-btn>
   </v-app-bar>
 </template>

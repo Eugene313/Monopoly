@@ -1,11 +1,12 @@
 <template>
-  <v-row justify="center">
+  <div class="sign-in">
     <v-card
       width="500"
+      height="max-content"
       class="text-left"
     >
       <v-card-title>
-        Log In
+        Sign In
       </v-card-title>
       <v-card-text>
         <form>
@@ -13,23 +14,34 @@
             v-model="email"
             label="E-mail"
             required
+            prepend-icon="mdi-email"
           />
           <v-text-field
             v-model="password"
             label="Password"
             required
-            type="password"
+            :type="showPassword ? 'text' : 'password'"
+            prepend-icon="mdi-lock"
+            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="showPassword = !showPassword"
           />
-          <v-btn
-            class="mr-4"
-            @click="login"
-          >
-            submit
-          </v-btn>
+          <v-row justify="center">
+            <v-col md="auto">
+              <v-btn
+                color="success"
+                @click="login"
+              >
+                <v-icon>
+                  mdi-check
+                </v-icon>
+                Sign in
+              </v-btn>
+            </v-col>
+          </v-row>
         </form>
       </v-card-text>
     </v-card>
-  </v-row>
+  </div>
 </template>
 <script>
 import { mapActions } from 'vuex';
@@ -45,6 +57,7 @@ export default {
   layout: 'landingLayout',
   data() {
     return {
+      showPassword: false,
       email: '',
       password: '',
     };
@@ -67,3 +80,9 @@ export default {
   },
 };
 </script>
+<style lang="sass">
+.sign-in
+  display: flex
+  justify-content: center
+  height: 100%
+</style>
