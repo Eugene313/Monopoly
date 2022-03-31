@@ -1,0 +1,40 @@
+<template>
+  <v-app-bar
+    app
+    clipped-left
+  >
+    <nuxt-link :to="localePath('/')">
+      <v-img
+        max-width="200"
+        max-height="60"
+        src="/image/monopoly-logo-png-transparent.png"
+      />
+    </nuxt-link>
+    <v-spacer />
+    <v-btn
+      class="ml-5"
+      @click="login"
+    >
+      Login
+    </v-btn>
+    <v-btn
+      class="ml-5"
+      @click="registration"
+    >
+      Registration
+    </v-btn>
+  </v-app-bar>
+</template>
+<script>
+export default {
+  name: 'LandingLayoutHeader',
+  methods: {
+    login() {
+      this.$router.push(this.localePath({ name: 'Auth-SignIn' }));
+    },
+    registration() {
+      this.$router.push(this.localePath({ name: 'Auth-Registration' }));
+    },
+  },
+};
+</script>
