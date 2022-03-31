@@ -3,7 +3,6 @@
     <v-card
       width="500"
       height="max-content"
-      class="text-left"
     >
       <v-card-title>
         Registration
