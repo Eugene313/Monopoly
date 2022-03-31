@@ -118,6 +118,7 @@ export default {
     ]),
     async registration() {
       try {
+        this.$spinner.start();
         const { user } = await this.$fire.auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
         this.user.userId = user.uid;
         delete this.user.password;
@@ -127,6 +128,8 @@ export default {
         await this.$router.push(this.localePath({ name: 'Game-Search' }));
       } catch (e) {
         console.log(e);
+      } finally {
+        this.$spinner.finish();
       }
     },
   },

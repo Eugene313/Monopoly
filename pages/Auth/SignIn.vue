@@ -67,6 +67,7 @@ export default {
     ]),
     async login() {
       try {
+        this.$spinner.start();
         const user = await this.$fire.auth.signInWithEmailAndPassword(this.email, this.password);
         await this.onAuthStateChangedAction({
           authUser: user,
@@ -74,6 +75,8 @@ export default {
         await this.$router.push(this.localePath({ name: 'Game-Search' }));
       } catch (e) {
         console.log(e);
+      } finally {
+        this.$spinner.finish();
       }
     },
   },
