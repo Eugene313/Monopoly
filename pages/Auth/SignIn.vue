@@ -3,7 +3,6 @@
     <v-card
       width="500"
       height="max-content"
-      class="text-left"
     >
       <v-card-title>
         Sign In
@@ -84,5 +83,6 @@ export default {
 .sign-in
   display: flex
   justify-content: center
+  width: 100%
   height: 100%
 </style>
