@@ -8,8 +8,8 @@
         <v-col>
           <v-list>
             <v-list-item
-              v-for="game in games"
-              :key="game.id"
+              v-for="(room, roomKey) in rooms"
+              :key="roomKey"
             >
               <v-list-item-action>
                 <v-icon>
@@ -20,7 +20,7 @@
                 <v-list-item-title>
                   <v-btn
                     color="success"
-                    @click="pushToGamePage(game)"
+                    @click="pushToGamePage(room)"
                   >
                     play
                   </v-btn>
@@ -44,17 +44,27 @@ export default {
   },
   data() {
     return {
-      games: [],
+      rooms: [],
     };
   },
   mounted() {
-    console.log(this.$fire.auth.currentUser, 'fire');
-    console.log(this.$store.state.auth.user, 'store');
-    this.getGames();
+    try {
+      this.getRooms();
+      this.addRoomsWatcher();
+    } catch (e) {
+      console.log(e);
+    };
   },
   methods: {
-    getGames() {
-      this.games = JSON.parse(localStorage.getItem('games')) || [];
+    async getRooms() {
+      this.rooms = (await this.$nuxt.$fire.database.ref('rooms').get()).val();
+    },
+    addRoomsWatcher() {
+      this.$fire.database.ref('rooms').on('child_added', this.updateRooms);
+    },
+    updateRooms(snapshot) {
+      console.log(snapshot);
+      this.$set(this.rooms, snapshot.key, snapshot.val());
     },
     pushToGamePage(game) {
       this.$router.push(this.localePath({

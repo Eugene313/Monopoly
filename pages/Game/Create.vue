@@ -87,6 +87,36 @@ export default {
   },
   mounted() {
     this.getLocalGames();
+    const roomModel = {
+      room_id: 'hUjA0U5w',
+      v: 2,
+      game_mode: 0,
+      game_submode: 0,
+      game_2x2: 0,
+      status: 0,
+      flags: {
+        ts_created: 1648741295,
+        disposition_mode: 0,
+        vip: 0,
+        is_tournament: 0,
+      },
+      admin: null,
+      players: [[1972021, 1964099]],
+      players_joined: {},
+      invites: [[]],
+      bans: [],
+      settings: {
+        maxplayers: 4,
+        private: 0,
+        autostart: 0,
+        game_timers: 1,
+        br_corner: 2,
+        restarts: 0,
+        pm_allowed: 1,
+        contract_protests: 0,
+      },
+    };
+    console.log(roomModel);
   },
   methods: {
     getLocalGames() {
