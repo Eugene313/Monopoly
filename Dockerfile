@@ -1,33 +1,16 @@
-FROM node:14 as build
+FROM node:14
 
-RUN mkdir -p /web
-WORKDIR /web
-ARG BASE_URL_AXIOS
-ARG CONFIG
+WORKDIR /usr/src/app
 
-ENV NUXT_VERSION=2.15.7
-ENV NUXT_HOST=0.0.0.0
-ENV NUXT_PORT=8000
-ENV CONFIG=${CONFIG}
+ENV PORT 8080
+ENV HOST 0.0.0.0
+
+COPY package*.json ./
+
+RUN npm install
 
 COPY . .
-RUN npm ci && npm rebuild node-sass && npm run build --standalone
 
-FROM node:14-alpine as release
+RUN npm run build
 
-RUN mkdir -p /web
-WORKDIR /web
-ARG BASE_URL_AXIOS
-ARG CONFIG
-
-ENV NUXT_VERSION=2.15.7
-ENV NUXT_HOST=0.0.0.0
-ENV NUXT_PORT=8000
-ENV CONFIG=${CONFIG}
-
-
-COPY --from=build /web  .
-
-EXPOSE 8000
-
-CMD npm run start-${CONFIG}
+CMD npm run start
