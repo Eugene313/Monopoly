@@ -40,6 +40,10 @@ export default {
     '@nuxtjs/moment',
     '@nuxtjs/vuetify',
   ],
+  plugins: [
+    '~/plugins/global-components.js',
+    { src: '~/plugins/spinner.js', mode: 'client' },
+  ],
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/i18n',
