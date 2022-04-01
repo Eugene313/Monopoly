@@ -1,5 +1,5 @@
 <template>
-  <div class="registrations">
+  <div class="sing-up">
     <v-card
       width="480"
       flat
@@ -7,7 +7,7 @@
     >
       <v-card-text>
         <p>Welcome to Monopoly Play!</p>
-        <p>Please register your account and start playing</p>
+        <p>Please register your account and start playing</p>FF
         <form>
           <v-text-field
             v-model="user.name"
@@ -76,14 +76,14 @@
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'Registration',
+  name: 'SingUp',
   nuxtI18n: {
     paths: {
-      uk: '/auth/registration',
-      en: '/auth/registration',
+      uk: '/auth/singup',
+      en: '/auth/singup',
     },
   },
-  layout: 'landingLayout',
+  layout: 'authLayout',
   data() {
     return {
       showPassword: false,
@@ -136,7 +136,7 @@ export default {
 };
 </script>
 <style lang="sass">
-.registrations
+.sing-up
   display: flex
   justify-content: flex-end
   height: 100%

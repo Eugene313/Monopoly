@@ -4,6 +4,7 @@
 <script>
 export default {
   name: 'SignOut',
+  layout: 'gameLayout',
   nuxtI18n: {
     paths: {
       uk: '/auth/signout',
