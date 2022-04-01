@@ -1,21 +1,18 @@
 <template>
-  <v-app dark>
-    <LandingLayoutHeader />
+  <v-app>
+    <Background />
     <v-main>
-      <LandingLayoutBackGround />
       <nuxt />
     </v-main>
   </v-app>
 </template>
 <script>
-import LandingLayoutHeader from '~/components/Layout/LandingLayout/LandingLayoutHeader';
-import LandingLayoutBackGround from '~/components/Layout/LandingLayout/LandingLayoutBackGround';
+import Background from '~/components/Common/Background';
 
 export default {
   name: 'LandingLayout',
   components: {
-    LandingLayoutHeader,
-    LandingLayoutBackGround,
+    Background,
   },
   middleware: ['loggedIn'],
 };

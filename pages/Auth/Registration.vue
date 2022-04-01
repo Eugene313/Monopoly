@@ -1,19 +1,19 @@
 <template>
   <div class="registrations">
     <v-card
-      width="500"
-      height="max-content"
+      width="480"
+      flat
+      class="pa-10"
     >
-      <v-card-title>
-        Registration
-      </v-card-title>
       <v-card-text>
+        <p>Welcome to Monopoly Play!</p>
+        <p>Please register your account and start playing</p>
         <form>
           <v-text-field
             v-model="user.name"
             label="Name"
             required
-            prepend-icon="mdi-account-circle"
+            outlined
           />
           <v-select
             v-model="user.gender"
@@ -21,27 +21,27 @@
             item-text="title"
             item-value="id"
             label="Gender"
-            prepend-icon="mdi-gender-male-female"
+            outlined
           />
           <v-text-field
             v-model="user.phone"
             label="Phone"
             required
-            prepend-icon="mdi-phone"
+            outlined
           />
           <v-text-field
             v-model="user.email"
             label="E-mail"
             required
-            prepend-icon="mdi-email"
+            outlined
           />
           <v-text-field
             v-model="user.password"
             label="Password"
             required
             :type="showPassword ? 'text' : 'password'"
-            prepend-icon="mdi-lock"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            outlined
             @click:append="showPassword = !showPassword"
           />
           <v-text-field
@@ -49,14 +49,14 @@
             label="Confirm password"
             required
             :type="showPassword ? 'text' : 'password'"
-            prepend-icon="mdi-lock"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            outlined
             @click:append="showPassword = !showPassword"
           />
           <v-row justify="center">
             <v-col md="5">
               <v-btn
-                color="success"
+                color="primary"
                 class="mr-4"
                 @click="registration"
               >
@@ -138,6 +138,6 @@ export default {
 <style lang="sass">
 .registrations
   display: flex
-  justify-content: center
+  justify-content: flex-end
   height: 100%
 </style>

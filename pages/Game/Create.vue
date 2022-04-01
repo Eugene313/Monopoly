@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card flat>
     <v-card-title>
       Create Game
     </v-card-title>
@@ -8,31 +8,22 @@
         <v-row>
           <v-col>
             <v-select
-              v-model="game.type"
-              :items="gameTypes"
-              item-text="title"
-              item-value="id"
-              label="Game type"
-            />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-select
-              v-model="game.mode"
+              v-model="room.settings.gameMode"
               :items="gameMods"
               item-text="title"
               item-value="id"
               label="Game mode"
+              outlined
             />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
             <v-select
-              v-model="game.playersCount"
+              v-model="room.settings.maxPlayers"
               :items="[2,3,4,5]"
               label="Number of players"
+              outlined
             />
           </v-col>
         </v-row>
@@ -42,8 +33,8 @@
       <v-row justify="center">
         <v-col md="1">
           <v-btn
-            color="success"
-            @click="createGame"
+            color="primary"
+            @click="createRoom"
           >
             create
           </v-btn>
@@ -53,6 +44,8 @@
   </v-card>
 </template>
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'GameCreate',
   nuxtI18n: {
@@ -63,80 +56,51 @@ export default {
   },
   data() {
     return {
-      games: [],
       valid: false,
-      game: {
-        id: Date.now(),
-        playersCount: 2,
-        type: 'offline',
-        mode: 'classic',
-      },
-      gameTypes: [
-        {
-          id: 'offline',
-          title: 'Offline',
-        },
-      ],
       gameMods: [
         {
-          id: 'classic',
+          id: '1',
           title: 'Classic',
         },
       ],
+      room: {
+        adminUserId: null,
+        playersIds: [],
+        invitesPlayersIds: [],
+        bansPlayersIds: [],
+        settings: {
+          maxPlayers: 4,
+          gameMode: 0,
+        },
+      },
     };
+  },
+  computed: {
+    ...mapState('auth', [
+      'fullUser',
+    ]),
   },
   mounted() {
-    this.getLocalGames();
-    const roomModel = {
-      room_id: 'hUjA0U5w',
-      v: 2,
-      game_mode: 0,
-      game_submode: 0,
-      game_2x2: 0,
-      status: 0,
-      flags: {
-        ts_created: 1648741295,
-        disposition_mode: 0,
-        vip: 0,
-        is_tournament: 0,
-      },
-      admin: null,
-      players: [[1972021, 1964099]],
-      players_joined: {},
-      invites: [[]],
-      bans: [],
-      settings: {
-        maxplayers: 4,
-        private: 0,
-        autostart: 0,
-        game_timers: 1,
-        br_corner: 2,
-        restarts: 0,
-        pm_allowed: 1,
-        contract_protests: 0,
-      },
-    };
-    console.log(roomModel);
+    this.setDefaultUserInfo();
   },
   methods: {
-    getLocalGames() {
-      this.games = JSON.parse(localStorage.getItem('games')) || [];
+    setDefaultUserInfo() {
+      this.room.adminUserId = this.fullUser.userId;
+      this.room.playersIds.push(this.fullUser.userId);
     },
-    saveGameToLocalStorage() {
-      this.games.push(this.game);
-      localStorage.setItem('games', JSON.stringify(this.games));
+    pushToSearchPage() {
+      this.$router.push(this.localePath({ name: 'Game-Search' }));
     },
-    pushToGamePage() {
-      this.$router.push(this.localePath({
-        name: 'Game-Play',
-        params: {
-          id: this.game.id,
-        },
-      }));
-    },
-    createGame() {
-      this.saveGameToLocalStorage();
-      this.pushToGamePage();
+    async createRoom() {
+      try {
+        this.$spinner.start();
+        await this.$fire.database.ref('rooms').push().set(this.room);
+        await this.pushToSearchPage();
+      } catch (e) {
+        console.log(e);
+      } finally {
+        this.$spinner.finish();
+      }
     },
   },
 };
