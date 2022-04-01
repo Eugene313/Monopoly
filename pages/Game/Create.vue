@@ -54,6 +54,7 @@ export default {
       en: '/game/create',
     },
   },
+  layout: 'gameLayout',
   data() {
     return {
       valid: false,

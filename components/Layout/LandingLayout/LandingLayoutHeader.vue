@@ -29,7 +29,7 @@ export default {
       this.$router.push(this.localePath({ name: 'Auth-SignIn' }));
     },
     registration() {
-      this.$router.push(this.localePath({ name: 'Auth-Registration' }));
+      this.$router.push(this.localePath({ name: 'Auth-SignUp' }));
     },
   },
 };

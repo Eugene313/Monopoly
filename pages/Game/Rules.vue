@@ -14,5 +14,6 @@ export default {
       en: '/game/rules',
     },
   },
+  layout: 'gameLayout',
 };
 </script>

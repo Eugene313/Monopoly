@@ -1,17 +1,17 @@
 <template>
   <v-card flat>
     <v-card-title>
-      History
+      Profile
     </v-card-title>
   </v-card>
 </template>
 <script>
 export default {
-  name: 'History',
+  name: 'Profile',
   nuxtI18n: {
     paths: {
-      uk: '/game/history',
-      en: '/game/history',
+      uk: '/game/profile',
+      en: '/game/profile',
     },
   },
   layout: 'gameLayout',

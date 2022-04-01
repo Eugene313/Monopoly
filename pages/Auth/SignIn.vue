@@ -19,6 +19,8 @@
           label="E-mail"
           :error-messages="emailErrors"
           outlined
+          prepend-inner-icon="mdi-at"
+          placeholder="email.example.com"
           @blur="$v.email.$touch()"
         />
         <v-text-field
@@ -28,6 +30,7 @@
           :type="showPassword ? 'text' : 'password'"
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           outlined
+          prepend-inner-icon="mdi-key-variant"
           @blur="$v.password.$touch()"
           @click:append="showPassword = !showPassword"
         />
@@ -50,7 +53,7 @@
         </div>
         <div class="sign-in_sing-up">
           <span>New on our platform?</span>
-          <nuxt-link :to="localePath({ name: 'Auth-Registration' })">
+          <nuxt-link :to="localePath({ name: 'Auth-SignUp' })">
             Create an account
           </nuxt-link>
         </div>
@@ -70,7 +73,7 @@ export default {
       en: '/auth/signin',
     },
   },
-  layout: 'landingLayout',
+  layout: 'authLayout',
   data() {
     return {
       showPassword: false,
@@ -147,7 +150,7 @@ export default {
     display: flex
     flex-direction: column
     justify-content: center
-    padding: 40px
+    padding: 40px 60px
   .sign-in_form-title
     margin-bottom: 8px
     color: rgba(94,86,105,.87)
@@ -178,4 +181,13 @@ export default {
     a
       text-decoration: none
       color: #9155fd
+@media (max-width: 1200px)
+  .sign-in
+    justify-content: center
+    .sign-in_logo
+      display: none
+    .sign-in_form
+      width: 100%
+      padding: 10px
+      min-width: auto
 </style>

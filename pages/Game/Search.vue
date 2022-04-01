@@ -3,6 +3,7 @@
     <v-card
       v-if="userAdminRooms.length"
       flat
+      class="mb-15"
     >
       <v-card-title>
         Your game
@@ -26,7 +27,11 @@
         </v-row>
       </v-card-text>
     </v-card>
-    <v-card v-if="userInviteRooms.length">
+    <v-card
+      v-if="userInviteRooms.length"
+      class="mb-15"
+      flat
+    >
       <v-card-title>
         Invite games
       </v-card-title>
@@ -45,7 +50,11 @@
         </v-row>
       </v-card-text>
     </v-card>
-    <v-card v-if="otherRooms.length">
+    <v-card
+      v-if="otherRooms.length"
+      class="mb-15"
+      flat
+    >
       <v-card-title>
         All games
       </v-card-title>
@@ -77,6 +86,7 @@ export default {
       en: '/game/search',
     },
   },
+  layout: 'gameLayout',
   data() {
     return {
       rooms: {},
@@ -93,7 +103,7 @@ export default {
       return Object.values(this.rooms).filter(r => (r.invitesPlayersIds || []).includes(this.fullUser.userId));
     },
     otherRooms() {
-      return Object.values(this.rooms).filter(r => (r.invitesPlayersIds || []).includes(this.fullUser.userId) && r.playersIds.includes(this.fullUser.userId));
+      return Object.values(this.rooms).filter(r => !(r.invitesPlayersIds || []).includes(this.fullUser.userId) && !r.playersIds.includes(this.fullUser.userId));
     },
   },
   async mounted() {

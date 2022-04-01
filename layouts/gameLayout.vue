@@ -1,24 +1,26 @@
 <template>
   <v-app>
     <Background />
-    <GameLayoutUsers />
+    <GameLayoutHeader />
+    <GameLayoutMenu />
     <v-main>
-      <nuxt />
+      <v-container fluid>
+        <nuxt />
+      </v-container>
     </v-main>
-    <GameLayoutChat />
   </v-app>
 </template>
 <script>
 import Background from '~/components/Common/Background';
-import GameLayoutUsers from '~/components/Layout/GameLayout/GameLayoutUsers';
-import GameLayoutChat from '~/components/Layout/GameLayout/GameLayoutChat';
+import GameLayoutHeader from '~/components/Layout/GameLayout/GameLayoutHeader';
+import GameLayoutMenu from '~/components/Layout/GameLayout/GameLayoutMenu';
 
 export default {
   name: 'GameLayout',
   components: {
     Background,
-    GameLayoutUsers,
-    GameLayoutChat,
+    GameLayoutHeader,
+    GameLayoutMenu,
   },
   middleware: ['auth'],
 };
