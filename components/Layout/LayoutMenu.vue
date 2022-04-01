@@ -2,40 +2,46 @@
   <v-navigation-drawer
     v-model="drawerState"
     app
-    clipped
+    floating
+    color="#ffffff00"
   >
-    <v-list>
-      <v-list-item v-if="user">
-        <v-list-item-avatar>
-          <v-img
-            alt="user"
-            :src="userPhoto"
-            :width="30"
-            :height="40"
-          />
-        </v-list-item-avatar>
-        <v-list-item-content>
-          <v-list-item-title>
-            {{ userName }}
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-      <v-list-item
-        v-for="item in menu"
-        :key="item.name"
-        @click="toRoute(item.name)"
+    <v-list shaped>
+      <v-list-item-group
+        v-model="selectedItem"
+        color="primary"
       >
-        <v-list-item-action>
-          <v-icon>
-            {{ item.icon }}
-          </v-icon>
-        </v-list-item-action>
-        <v-list-item-content>
-          <v-list-item-title>
-            {{ item.title }}
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+        <v-list-item v-if="fullUser">
+          <v-list-item-avatar>
+            <v-img
+              alt="user"
+              :src="userPhoto"
+              :width="30"
+              :height="40"
+            />
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ userName }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item
+          v-for="item in menu"
+          :key="item.name"
+          @click="toRoute(item.name)"
+        >
+          <v-list-item-action>
+            <v-icon>
+              {{ item.icon }}
+            </v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ item.title }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-item-group>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -47,6 +53,7 @@ export default {
   name: 'LayoutMenu',
   data() {
     return {
+      selectedItem: this.$route.name,
       menu: [
         {
           name: 'Game-Search',
@@ -71,7 +78,7 @@ export default {
       'drawer',
     ]),
     ...mapState('auth', [
-      'user',
+      'fullUser',
     ]),
     drawerState: {
       get() {
@@ -82,10 +89,10 @@ export default {
       },
     },
     userPhoto() {
-      return this.user.photoURL || defaultPhoto;
+      return this.fullUser.avatarUrl || defaultPhoto;
     },
     userName() {
-      return this.user.displayName || 'Profile';
+      return this.fullUser.name || 'Profile';
     },
   },
   methods: {

@@ -1,8 +1,6 @@
-import colors from 'vuetify/es5/util/colors';
-
 export default {
   head: {
-    title: 'monopoly',
+    title: 'Monopoly Play',
     htmlAttrs: {
       lang: 'en',
     },
@@ -13,7 +11,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },
     ],
   },
   debug: process.env.NODE_ENV === 'development',
@@ -42,6 +40,7 @@ export default {
   ],
   plugins: [
     '~/plugins/global-components.js',
+    '~/plugins/vuelidate.js',
     { src: '~/plugins/spinner.js', mode: 'client' },
   ],
   modules: [
@@ -78,16 +77,16 @@ export default {
   vuetify: {
     customVariables: ['~/assets/sass/variables.scss'],
     theme: {
-      dark: true,
       themes: {
-        dark: {
-          primary: colors.purple.darken3,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.darken1,
+        light: {
+          primary: '#9253f7',
+          accent: '#f4f5fa',
+          secondary: '#f4f5fa',
+          info: '#f2eafd',
+          warning: '#f6b443',
+          error: '#ed484e',
+          success: '#5eca33',
+          background: '#f4f5fa',
         },
       },
     },

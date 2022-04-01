@@ -1,15 +1,9 @@
 <template>
   <v-app-bar
     app
-    clipped-left
+    flat
+    color="#ffffff00"
   >
-    <nuxt-link :to="localePath('/')">
-      <v-img
-        max-width="200"
-        max-height="60"
-        src="/image/monopoly-logo-png-transparent.png"
-      />
-    </nuxt-link>
     <v-spacer />
     <v-btn
       text

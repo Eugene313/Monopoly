@@ -1,5 +1,6 @@
 <template>
-  <v-app dark>
+  <v-app>
+    <Background />
     <LayoutHeader />
     <LayoutMenu />
     <v-main>
@@ -10,12 +11,14 @@
   </v-app>
 </template>
 <script>
+import Background from '~/components/Common/Background';
 import LayoutHeader from '~/components/Layout/LayoutHeader';
 import LayoutMenu from '~/components/Layout/LayoutMenu';
 
 export default {
   name: 'DefaultLayout',
   components: {
+    Background,
     LayoutHeader,
     LayoutMenu,
   },
