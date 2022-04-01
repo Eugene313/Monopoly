@@ -10,12 +10,9 @@
     <v-spacer />
     <v-btn
       v-if="user"
-      text
+      outlined
       @click="logOut"
     >
-      <v-icon left>
-        mdi-play
-      </v-icon>
       LogOut
     </v-btn>
   </v-app-bar>
