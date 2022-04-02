@@ -3,38 +3,26 @@
     v-model="drawerState"
     app
     floating
-    color="#ffffff00"
+    color="#fff"
   >
     <v-list shaped>
-      <v-list-item-group
-        v-model="selectedItem"
-        color="primary"
-      >
-        <v-list-item v-if="fullUser">
-          <v-list-item-avatar>
-            <v-img
-              alt="user"
-              :src="userPhoto"
-              :width="30"
-              :height="40"
-            />
-          </v-list-item-avatar>
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ userName }}
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+      <v-list-item-group>
         <v-list-item
           v-for="item in menu"
           :key="item.name"
-          @click="toRoute(item.name)"
+          :to="localePath({ name: item.name })"
+          nuxt
         >
-          <v-list-item-action>
-            <v-icon>
+          <v-list-item-avatar>
+            <v-icon v-if="item.icon">
               {{ item.icon }}
             </v-icon>
-          </v-list-item-action>
+            <v-img
+              v-else
+              alt="user"
+              :src="item.avatarUrl"
+            />
+          </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title>
               {{ item.title }}
@@ -51,28 +39,6 @@ import defaultPhoto from '~/static/image/profile-avatart.png';
 
 export default {
   name: 'CabinetLayoutMenu',
-  data() {
-    return {
-      selectedItem: this.$route.name,
-      menu: [
-        {
-          name: 'Cabinet-Search',
-          icon: 'mdi-magnify',
-          title: 'Search Game',
-        },
-        {
-          name: 'Cabinet-Create',
-          icon: 'mdi-plus',
-          title: 'Create Game',
-        },
-        {
-          name: 'Cabinet-History',
-          icon: 'mdi-history',
-          title: 'History',
-        },
-      ],
-    };
-  },
   computed: {
     ...mapState('layout', [
       'drawer',
@@ -88,20 +54,35 @@ export default {
         this.setDrawer(value);
       },
     },
-    userPhoto() {
-      return this.fullUser.avatarUrl || defaultPhoto;
-    },
-    userName() {
-      return this.fullUser.name || 'Profile';
+    menu() {
+      return [
+        {
+          name: 'Cabinet-Profile',
+          avatarUrl: this?.fullUser?.avatarUrl || defaultPhoto,
+          title: this?.fullUser?.name,
+        },
+        {
+          name: 'Cabinet-Search',
+          icon: 'mdi-magnify',
+          title: 'Search Game',
+        },
+        {
+          name: 'Cabinet-Create',
+          icon: 'mdi-plus',
+          title: 'Create Game',
+        },
+        {
+          name: 'Cabinet-History',
+          icon: 'mdi-history',
+          title: 'History',
+        },
+      ];
     },
   },
   methods: {
     ...mapActions('layout', [
       'setDrawer',
     ]),
-    toRoute(name) {
-      this.$router.push(this.localePath({ name }));
-    },
   },
 };
 </script>

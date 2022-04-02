@@ -23,13 +23,15 @@ export const actions = {
       commit('ON_AUTH_STATE_CHANGED_MUTATION', null);
     } else {
       commit('ON_AUTH_STATE_CHANGED_MUTATION', authUser);
-      await dispatch('getFullUser');
     }
+    await dispatch('getFullUser');
   },
   async getFullUser({ state, commit }) {
     if (state.user) {
       const fullUser = await this.$fire.database.ref(`users/${state.user.uid}`).get();
       commit('SET_FULL_USER', fullUser.val());
+    } else {
+      commit('SET_FULL_USER', null);
     }
   },
 };
