@@ -1,5 +1,8 @@
 <template>
-  <div class="game-play_bord">
+  <div
+    class="game-play_bord"
+    :style="boardStyle"
+  >
     <div class="game-play_bord-center">
       <img
         src="~/static/image/monopoly-logo.png"
@@ -30,17 +33,25 @@ export default {
       default: () => [],
     },
   },
+  computed: {
+    boardStyle() {
+      return {
+        transform: 'rotateX(45deg)',
+      };
+    },
+  },
 };
 </script>
 <style lang="sass">
   .game-play_bord
     width: 830px
     height: 830px
-    background: #262c2f
+    background: #d1edff
     position: relative
     font-family: 'Comic Sans MS', 'sans-serif'
     box-shadow: 0 0 0 3px #484848
-    color: white
+    color: black
+    transition: 1s
     .game-play_bord-center
       display: flex
       justify-content: center

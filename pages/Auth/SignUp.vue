@@ -35,6 +35,7 @@
         />
         <v-text-field
           v-model="user.phone"
+          type="number"
           label="Phone"
           outlined
           :error-messages="phoneErrors"
