@@ -35,6 +35,7 @@
         />
         <v-text-field
           v-model="user.phone"
+          type="number"
           label="Phone"
           outlined
           :error-messages="phoneErrors"
@@ -231,7 +232,7 @@ export default {
         delete this.user.confirmPassword;
         await this.$fire.database.ref(`users/${user.uid}`).set(this.user);
         await this.onAuthStateChangedAction({ authUser: user });
-        await this.$router.push(this.localePath({ name: 'Game-Search' }));
+        await this.$router.push(this.localePath({ name: 'Cabinet-Search' }));
       } catch (e) {
         console.log(e);
       } finally {

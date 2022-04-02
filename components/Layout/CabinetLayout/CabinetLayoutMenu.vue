@@ -50,23 +50,23 @@ import { mapState, mapActions } from 'vuex';
 import defaultPhoto from '~/static/image/profile-avatart.png';
 
 export default {
-  name: 'GameLayoutMenu',
+  name: 'CabinetLayoutMenu',
   data() {
     return {
       selectedItem: this.$route.name,
       menu: [
         {
-          name: 'Game-Search',
+          name: 'Cabinet-Search',
           icon: 'mdi-magnify',
           title: 'Search Game',
         },
         {
-          name: 'Game-Create',
+          name: 'Cabinet-Create',
           icon: 'mdi-plus',
           title: 'Create Game',
         },
         {
-          name: 'Game-History',
+          name: 'Cabinet-History',
           icon: 'mdi-history',
           title: 'History',
         },

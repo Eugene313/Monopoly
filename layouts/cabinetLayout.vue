@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <Background />
-    <GameLayoutHeader />
-    <GameLayoutMenu />
+    <CabinetLayoutHeader />
+    <CabinetLayoutMenu />
     <v-main>
       <v-container fluid>
         <nuxt />
@@ -12,15 +12,15 @@
 </template>
 <script>
 import Background from '~/components/Common/Background';
-import GameLayoutHeader from '~/components/Layout/GameLayout/GameLayoutHeader';
-import GameLayoutMenu from '~/components/Layout/GameLayout/GameLayoutMenu';
+import CabinetLayoutHeader from '~/components/Layout/CabinetLayout/CabinetLayoutHeader';
+import CabinetLayoutMenu from '~/components/Layout/CabinetLayout/CabinetLayoutMenu';
 
 export default {
   name: 'GameLayout',
   components: {
     Background,
-    GameLayoutHeader,
-    GameLayoutMenu,
+    CabinetLayoutHeader,
+    CabinetLayoutMenu,
   },
   middleware: ['auth'],
 };

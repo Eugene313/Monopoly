@@ -1,19 +1,19 @@
 <template>
-  <v-card>
+  <v-card flat>
     <v-card-title>
-      rules
+      Profile
     </v-card-title>
   </v-card>
 </template>
 <script>
 export default {
-  name: 'Rules',
+  name: 'Profile',
   nuxtI18n: {
     paths: {
-      uk: '/game/rules',
-      en: '/game/rules',
+      uk: '/cabinet/profile',
+      en: '/cabinet/profile',
     },
   },
-  layout: 'gameLayout',
+  layout: 'cabinetLayout',
 };
 </script>

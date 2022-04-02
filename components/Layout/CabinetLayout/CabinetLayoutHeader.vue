@@ -21,7 +21,7 @@
 import { mapState, mapActions } from 'vuex';
 
 export default {
-  name: 'GameLayoutHeader',
+  name: 'CabinetLayoutHeader',
   computed: {
     ...mapState('layout', [
       'drawer',

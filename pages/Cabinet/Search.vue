@@ -82,11 +82,11 @@ export default {
   name: 'Search',
   nuxtI18n: {
     paths: {
-      uk: '/game/search',
-      en: '/game/search',
+      uk: '/cabinet/search',
+      en: '/cabinet/search',
     },
   },
-  layout: 'gameLayout',
+  layout: 'cabinetLayout',
   data() {
     return {
       rooms: {},

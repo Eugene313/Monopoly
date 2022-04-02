@@ -10,10 +10,10 @@ export default {
   name: 'History',
   nuxtI18n: {
     paths: {
-      uk: '/game/history',
-      en: '/game/history',
+      uk: '/cabinet/history',
+      en: '/cabinet/history',
     },
   },
-  layout: 'gameLayout',
+  layout: 'cabinetLayout',
 };
 </script>

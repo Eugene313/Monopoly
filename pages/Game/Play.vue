@@ -14,7 +14,7 @@ import companyes from '~/constans/companyes';
 import actions from '~/constans/actions';
 
 export default {
-  name: 'GamePlay',
+  name: 'Play',
   components: {
     GamePlayBoard,
   },
@@ -171,4 +171,5 @@ export default {
   justify-content: center
   min-height: 100%
   padding-top: 10px
+  perspective: 1000px
 </style>
