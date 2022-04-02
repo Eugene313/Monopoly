@@ -33,8 +33,31 @@
     </v-list>
     <v-list subheader>
       <v-subheader>
-        Friends ({{ friendsCount }})
+        Friends ({{ friends.length }})
       </v-subheader>
+      <v-list-item v-if="!friends.length">
+        <v-list-item-content>
+          <v-list-item-subtitle>
+            You have no friends
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item
+        v-for="friend in friends"
+        :key="friend.userId"
+      >
+        <v-list-item-avatar>
+          <v-img
+            alt=""
+            :src="friend.avatartUrl || defaultPhoto"
+          />
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title>
+            {{ friend.name }}
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -44,6 +67,12 @@ import defaultPhoto from '~/static/image/profile-avatart.png';
 
 export default {
   name: 'CabinetLayoutMenu',
+  data() {
+    return {
+      defaultPhoto,
+      friends: [],
+    };
+  },
   computed: {
     ...mapState('layout', [
       'drawer',
@@ -59,14 +88,11 @@ export default {
         this.setDrawer(value);
       },
     },
-    friendsCount() {
-      return this.fullUser?.friends.length;
-    },
     menu() {
       return [
         {
           name: 'Cabinet-Profile',
-          avatarUrl: this.fullUser?.avatarUrl || defaultPhoto,
+          avatarUrl: this.fullUser?.avatarUrl || this.defaultPhoto,
           title: this.fullUser?.name,
         },
         {
@@ -80,6 +106,11 @@ export default {
           title: 'Create Game',
         },
         {
+          name: 'Cabinet-SearchFriends',
+          icon: 'mdi-account-search',
+          title: 'Search Friends',
+        },
+        {
           name: 'Cabinet-History',
           icon: 'mdi-history',
           title: 'History',
@@ -87,10 +118,44 @@ export default {
       ];
     },
   },
+  async mounted() {
+    await this.getFriends();
+  },
   methods: {
     ...mapActions('layout', [
       'setDrawer',
     ]),
+    async getFriends() {
+      const senderRequest = await this.$fire.database.ref('friends').orderByChild('senderId').equalTo(this.fullUser.userId).get();
+      const receiverRequest = await this.$fire.database.ref('friends').orderByChild('receiverId').equalTo(this.fullUser.userId).get();
+      let result = {};
+      if (senderRequest) {
+        result = {
+          ...result,
+          ...senderRequest.val(),
+        };
+      }
+      if (receiverRequest) {
+        result = {
+          ...result,
+          ...receiverRequest.val(),
+        };
+      }
+      const confirmRequests = Object.values(result).filter(r => r.status === 'confirm');
+      const friendsIds = [];
+      for (const request of confirmRequests) {
+        if (request.receiverId !== this.fullUser.userId) {
+          friendsIds.push(request.receiverId);
+        }
+        if (request.senderId !== this.fullUser.userId) {
+          friendsIds.push(request.senderId);
+        }
+      }
+      for (const friend of friendsIds) {
+        const user = await this.$fire.database.ref('users').child(friend).get();
+        this.friends.push(user.val());
+      }
+    },
   },
 };
 </script>
