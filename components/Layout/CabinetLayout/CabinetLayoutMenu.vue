@@ -31,6 +31,11 @@
         </v-list-item>
       </v-list-item-group>
     </v-list>
+    <v-list subheader>
+      <v-subheader>
+        Friends ({{ friendsCount }})
+      </v-subheader>
+    </v-list>
   </v-navigation-drawer>
 </template>
 <script>
@@ -54,12 +59,15 @@ export default {
         this.setDrawer(value);
       },
     },
+    friendsCount() {
+      return this.fullUser?.friends.length;
+    },
     menu() {
       return [
         {
           name: 'Cabinet-Profile',
-          avatarUrl: this?.fullUser?.avatarUrl || defaultPhoto,
-          title: this?.fullUser?.name,
+          avatarUrl: this.fullUser?.avatarUrl || defaultPhoto,
+          title: this.fullUser?.name,
         },
         {
           name: 'Cabinet-Search',
