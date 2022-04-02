@@ -97,13 +97,13 @@ export default {
       'fullUser',
     ]),
     userAdminRooms() {
-      return Object.values(this.rooms).filter(r => r.playersIds.includes(this.fullUser.userId));
+      return Object.values(this.rooms).filter(r => r.playersIds.includes(this.fullUser?.userId));
     },
     userInviteRooms() {
-      return Object.values(this.rooms).filter(r => (r.invitesPlayersIds || []).includes(this.fullUser.userId));
+      return Object.values(this.rooms).filter(r => (r.invitesPlayersIds || []).includes(this.fullUser?.userId));
     },
     otherRooms() {
-      return Object.values(this.rooms).filter(r => !(r.invitesPlayersIds || []).includes(this.fullUser.userId) && !r.playersIds.includes(this.fullUser.userId));
+      return Object.values(this.rooms).filter(r => !(r.invitesPlayersIds || []).includes(this.fullUser?.userId) && !r.playersIds.includes(this.fullUser?.userId));
     },
   },
   async mounted() {
@@ -123,13 +123,6 @@ export default {
       for (const key in this.rooms) {
         console.log(key);
       }
-      // const usersIds = Object.values(this.rooms).reduce((total, room) => {
-      //   room.playersIds.forEach((id) => {
-      //     console.log(id);
-      //     total.push(id);
-      //   });
-      //   return total;
-      // }, []);
       console.log(usersIds);
     },
     async getRooms() {
