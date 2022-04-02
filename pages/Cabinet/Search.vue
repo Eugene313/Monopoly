@@ -3,7 +3,7 @@
     <v-card
       v-if="userAdminRooms.length"
       flat
-      class="mb-15"
+      class="mb-10"
     >
       <v-card-title>
         Your game
@@ -29,7 +29,7 @@
     </v-card>
     <v-card
       v-if="userInviteRooms.length"
-      class="mb-15"
+      class="mb-10"
       flat
     >
       <v-card-title>
@@ -52,7 +52,7 @@
     </v-card>
     <v-card
       v-if="otherRooms.length"
-      class="mb-15"
+      class="mb-10"
       flat
     >
       <v-card-title>
