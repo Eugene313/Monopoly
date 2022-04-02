@@ -1,14 +1,14 @@
 <template>
   <div class="background">
     <div
-      v-for="cube in cubes"
-      :key="cube"
+      v-for="(cube, cubeIndex) in cubes"
+      :key="cubeIndex"
       class="background_cube"
     >
       <div class="background_cube-wrap">
         <div
-          v-for="row in cube.rows"
-          :key="row"
+          v-for="(row, key) in cube.rows"
+          :key="key"
           class="background_cube-row"
         >
           <div

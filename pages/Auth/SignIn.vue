@@ -66,7 +66,7 @@ import { mapActions } from 'vuex';
 import { required, minLength, email } from 'vuelidate/lib/validators';
 
 export default {
-  name: 'SignOut',
+  name: 'SignIn',
   nuxtI18n: {
     paths: {
       uk: '/auth/signin',
@@ -118,7 +118,7 @@ export default {
         await this.onAuthStateChangedAction({
           authUser: user,
         });
-        await this.$router.push(this.localePath({ name: 'Game-Search' }));
+        await this.$router.push(this.localePath({ name: 'Cabinet-Search' }));
       } catch (e) {
         console.log(e.message);
       } finally {

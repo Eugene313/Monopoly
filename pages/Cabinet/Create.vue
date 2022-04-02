@@ -47,14 +47,14 @@
 import { mapState } from 'vuex';
 
 export default {
-  name: 'GameCreate',
+  name: 'Create',
   nuxtI18n: {
     paths: {
-      uk: '/game/create',
-      en: '/game/create',
+      uk: '/cabinet/create',
+      en: '/cabinet/create',
     },
   },
-  layout: 'gameLayout',
+  layout: 'cabinetLayout',
   data() {
     return {
       valid: false,
@@ -90,7 +90,7 @@ export default {
       this.room.playersIds.push(this.fullUser.userId);
     },
     pushToSearchPage() {
-      this.$router.push(this.localePath({ name: 'Game-Search' }));
+      this.$router.push(this.localePath({ name: 'Cabinet-Search' }));
     },
     async createRoom() {
       try {

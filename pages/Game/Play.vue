@@ -14,7 +14,7 @@ import companyes from '~/constans/companyes';
 import actions from '~/constans/actions';
 
 export default {
-  name: 'GamePlay',
+  name: 'Play',
   components: {
     GamePlayBoard,
   },
