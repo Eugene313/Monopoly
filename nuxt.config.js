@@ -92,7 +92,10 @@ export default {
     },
   },
   axios: {
-    baseURL: '/',
+    baseURL: '/api/',
+  },
+  serverMiddleware: {
+    '/api': '~/api',
   },
   moment: {
     timezone: true,
