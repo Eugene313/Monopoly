@@ -129,8 +129,7 @@ export default {
             result.delete = true;
           }
         }
-      }
-      if (this.searchUserRequests) {
+      } else if (this.searchUserRequests) {
         for (const key in this.searchUserRequests) {
           const request = this.searchUserRequests[key];
           if (request.senderId === searchUserId && request.status === 'await') {
