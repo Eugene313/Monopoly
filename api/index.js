@@ -1,11 +1,12 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const router = require('./routes/index');
 const app = express();
-const login = require('./routes/auth');
 
-app.use(login);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use('/', router);
 
 module.exports = app;
 
-if (require.main === module) {
-  app.listen(3001);
-}
+app.listen(3001);
